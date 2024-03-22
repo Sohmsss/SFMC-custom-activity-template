@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>JOURNEY BUILDER APP TEMPLATE</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie-edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link href='https://fonts.googleapis.com/css?family=lobster' rel='stylesheet' type='text/css'>
-    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/design-system/2.8.3/fonts/SalesforceSans-Bold.ttf">
-    <link rel='stylesheet' href="css/styles.css">
-    
-    <script type="text/javascript" src="js/require.js"></script>
-    <script type="text/javascript">
-        (function() {
-            var config = {
-                baseUrl: 'js'
-            };
-            var dependencies = [
-                'customActivity'
-            ];
-            require(config, dependencies);
-        })();
-    </script>
+    <title>Availability Check Configuration</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="path/to/postmonger.js"></script>
 </head>
-
-
 <body>
-    <h1>HAPI Availability check</h1>
-</body>
+    <div id="configuration-status">
+        <p>This activity is automatically configured based on the Data Extension.</p>
+        <button id="saveButton">Confirm</button>
+    </div>
 
+    <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
+    <script type="text/javascript">
+        // Assuming you're using RequireJS to structure your frontend code
+        require(['customActivity'], function(customActivity) {
+            customActivity.initialize();
+        });
+    </script>
+</body>
 </html>
