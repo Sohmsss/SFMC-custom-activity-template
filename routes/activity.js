@@ -4,6 +4,8 @@ var util = require('util');
 // Deps
 const Path = require('path');
 const JWT = require(Path.join(__dirname, '..', 'lib', 'jwtDecoder.js'));
+const moment = require('moment'); 
+
 var util = require('util');
 let axios = require("axios");
 
@@ -64,13 +66,105 @@ exports.edit = function (req, res) {
 /*
  * POST Handler for /save/ route of Activity.
  */
-exports.save = function (req, res) {
-    // Data from the req and put it in an array accessible to the main app.
-    //console.log( req.body );
-    logData(req);
-    res.send(200, 'Save');
-};
+exports.execute = function (req, res) {
+    JWT(req.body, process.env.jwtSecret, async (err, decoded) => {
+        if (err) {
+            console.error(err);
+            return res.status(401).end();
+        }
 
+        if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
+            const args = decoded.inArguments[0];
+            const userExtID = args.user_ext_id;
+            const lastSearchLocationName = args.last_search_location_name; // Corrected typo here
+            const lastSearchStay = args.last_search_stay_datetime;
+            const lastSearchDepart = args.last_search_depart_datetime;
+            const agent = 'WJ379'
+
+            const hapiFromDate = moment(lastSearchStay).format("YYYY-MM-DD HH:mm");
+            const hapiToDate = moment(lastSearchDepart).format("YYYY-MM-DD HH:mm");
+
+            let hapiAirport = '';
+
+            switch (lastSearchLocationName) {
+                case 'Heathrow':
+                    hapiAirport = 'LHR';
+                    break
+                case 'Gatwick':
+                    hapiAirport = 'LGW';
+                    break
+                case 'Manchester':
+                    hapiAirport = 'MAN';
+                    break
+                case 'Stansted':
+                    hapiAirport = 'STN';
+                    break
+                case 'Luton':
+                    hapiAirport = 'LTN';
+                    break
+                case 'Birmingham':
+                    hapiAirport = 'BHX';
+                    break
+                case 'Bristol':
+                    hapiAirport = 'BRS';
+                    break
+                case 'Edinburgh':
+                    hapiAirport = 'EDI';
+                    break
+                case 'Glasgow':
+                    hapiAirport = 'GLA';
+                    break
+                case 'Liverpool':
+                    hapiAirport = 'LPL';
+                    break
+                case 'Leeds Bradford':
+                    hapiAirport = 'LBA';
+                    break
+                case 'Newcastle':
+                    hapiAirport = 'NCL';
+                    break
+                case 'Southampton':
+                    hapiAirport = 'SOU';
+                    break
+                case 'Cardiff':
+                    hapiAirport = 'CWL';
+                    break
+                case 'East Midlands':
+                    hapiAirport = 'EMA';
+                    break
+                case 'Belfast International':
+                    hapiAirport = 'BFS';
+                    break
+                case 'Belfast City':
+                    hapiAirport = 'BHD';
+            }
+
+
+            const availabilityUrl = `https://hapi.holidayextras.co.uk/carparks?token=fb9e8f70-b38e-4c43-88a6-c08a6c7b4813&sid=12345&location=${hapiAirport}&from=${hapiFromDate}&to=${hapiToDate}&agent=${agent}`;
+
+            try {
+                const availabilityResponse = await axios.get(availabilityUrl);
+  
+
+                const availableProducts = availabilityResponse.data.products || [];
+
+                const isAvailable = availableProducts.length > 0;
+
+                res.status(200).json({
+                    branchResult: isAvailable ? 'available' : 'notAvailable'
+                });
+
+            } catch (availabilityError) {
+                console.error('Error calling the availability API:', availabilityError);
+                res.status(500).end();
+            }
+
+        } else {
+            console.error('inArguments invalid.');
+            return res.status(400).end();
+        }
+    });
+};
 /*
  * POST Handler for /execute/ route of Activity.
  */
