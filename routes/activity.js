@@ -63,8 +63,23 @@ exports.edit = function (req, res) {
     res.send(200, 'Edit');
 };
 
+// POST Handler for /save/ route of Activity.
+exports.save = function(req, res) {
+    // Log for debugging
+    console.log('Save endpoint hit with body:', req.body);
+
+    // Typically, you might save or process the data received from the request here.
+    // Since this is just a placeholder, we'll simply respond with a success message.
+
+    res.status(200).send({
+        success: true,
+        message: 'Data saved successfully'
+    });
+};
+
+
 /*
- * POST Handler for /save/ route of Activity.
+ * POST Handler for /execute/ route of Activity.
  */
 exports.execute = function (req, res) {
     JWT(req.body, process.env.jwtSecret, async (err, decoded) => {
@@ -76,7 +91,7 @@ exports.execute = function (req, res) {
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
             const args = decoded.inArguments[0];
             const userExtID = args.user_ext_id;
-            const lastSearchLocationName = args.last_search_location_name; // Corrected typo here
+            const lastSearchLocationName = args.last_search_location_name;
             const lastSearchStay = args.last_search_stay_datetime;
             const lastSearchDepart = args.last_search_depart_datetime;
             const agent = 'WJ379'
@@ -138,7 +153,6 @@ exports.execute = function (req, res) {
                 case 'Belfast City':
                     hapiAirport = 'BHD';
             }
-
 
             const availabilityUrl = `https://hapi.holidayextras.co.uk/carparks?token=fb9e8f70-b38e-4c43-88a6-c08a6c7b4813&sid=12345&location=${hapiAirport}&from=${hapiFromDate}&to=${hapiToDate}&agent=${agent}`;
 
