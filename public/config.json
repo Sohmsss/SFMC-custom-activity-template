@@ -12,8 +12,8 @@
     {
         "en-US":
         {
-            "name": "<NAME_OF_APP>",
-            "description": "<DESC_OF_APP>",
+            "name": "HX HAPI CALL",
+            "description": "Check Availability in Journey",
             "step1Label": "Configure Activity"
         }
     },
@@ -27,7 +27,7 @@
               }
             ],
             "outArguments": [],
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/execute",
+            "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/execute",
             "verb": "POST",
             "body": "",
             "header": "",
@@ -39,28 +39,28 @@
     
     "configurationArguments":
     {
-        "applicationExtensionKey": "<APP EXTENSION KEY>",
+        "applicationExtensionKey": "21fa5b89-3018-4e89-ac37-389c0e74dba1",
         "save":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/save",
+            "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/save",
             "verb": "POST",
             "useJwt": true
         },
         "publish":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/publish",
+            "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/publish",
             "verb": "POST",
             "useJwt": true
         },
         "stop":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/stop",
+            "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/stop",
             "verb": "POST",
             "useJwt": true
         },
         "validate":
         {
-            "url": "<HTTPS_URL_OF_APP>/journeybuilder/validate",
+            "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/validate",
             "verb": "POST",
             "useJwt": true
         }
