@@ -21,7 +21,6 @@
                     "last_search_stay_datetime": "{{Contact.Attribute.HX_Customer_Last_Search.last_search_stay_datetime}}",
                     "last_search_depart_datetime": "{{Contact.Attribute.HX_Customer_Last_Search.last_search_depart_datetime}}",
                     "last_search_location_name": "{{Contact.Attribute.HX_Customer_Last_Search.last_search_location_name}}"
-
                 }
             ],
             "outArguments": [],
@@ -53,6 +52,11 @@
         },
         "validate": {
             "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/validate",
+            "verb": "POST",
+            "useJwt": true
+        },
+        "execute": {
+            "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/execute",
             "verb": "POST",
             "useJwt": true
         }

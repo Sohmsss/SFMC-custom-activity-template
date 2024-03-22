@@ -68,9 +68,6 @@ exports.save = function(req, res) {
     // Log for debugging
     console.log('Save endpoint hit with body:', req.body);
 
-    // Typically, you might save or process the data received from the request here.
-    // Since this is just a placeholder, we'll simply respond with a success message.
-
     res.status(200).send({
         success: true,
         message: 'Data saved successfully'
@@ -90,7 +87,6 @@ exports.execute = function (req, res) {
 
         if (decoded && decoded.inArguments && decoded.inArguments.length > 0) {
             const args = decoded.inArguments[0];
-            const userExtID = args.user_ext_id;
             const lastSearchLocationName = args.last_search_location_name;
             const lastSearchStay = args.last_search_stay_datetime;
             const lastSearchDepart = args.last_search_depart_datetime;
@@ -158,7 +154,7 @@ exports.execute = function (req, res) {
 
             try {
                 const availabilityResponse = await axios.get(availabilityUrl);
-                const availableProducts = availabilityResponse.data.products || [];
+                const availableProducts = availabilityResponse.data || [];
                 const isAvailable = availableProducts.length > 0;
 
                 res.status(200).json({
@@ -176,10 +172,6 @@ exports.execute = function (req, res) {
         }
     });
 };
-/*
- * POST Handler for /execute/ route of Activity.
- */
-
 /*
  * POST Handler for /publish/ route of Activity.
  */

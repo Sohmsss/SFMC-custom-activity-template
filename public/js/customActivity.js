@@ -15,7 +15,6 @@ define(['postmonger'], function(Postmonger) {
         });
 
         document.getElementById('saveButton').addEventListener('click', function() {
-            // Indicate the activity is fully configured
             payload['metaData'].isConfigured = true;
             connection.trigger('updateActivity', payload);
         });
