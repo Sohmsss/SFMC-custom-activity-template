@@ -1,30 +1,24 @@
 {
     "workflowApiVersion": "1.1",
-    "metaData":
-    {
+    "metaData": {
         "icon": "images/icon.png",
         "iconSmall": "images/iconSmall.png",
-        "category": "<CATEGORY_OF_APP_BASED_ON_DOCS>"
+        "category": "data" 
     },
-
     "type": "REST",
-    "lang":
-    {
-        "en-US":
-        {
+    "lang": {
+        "en-US": {
             "name": "HX HAPI CALL",
             "description": "Check Availability in Journey",
             "step1Label": "Configure Activity"
         }
     },
-    "arguments":
-    {
-        "execute":
-        {
+    "arguments": {
+        "execute": {
             "inArguments": [
-              { 
-                "SAMPLE_PARAM": "SAMPLE PARAM DATA FROM CONFIG.JSON"
-              }
+                {
+                    "user_ext_id": "{{Contact.Attribute.HX_Customer_Last_Search.user_ext_id}}"
+                }
             ],
             "outArguments": [],
             "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/execute",
@@ -36,49 +30,51 @@
             "timeout": 10000
         }
     },
-    
-    "configurationArguments":
-    {
+    "configurationArguments": {
         "applicationExtensionKey": "21fa5b89-3018-4e89-ac37-389c0e74dba1",
-        "save":
-        {
+        "save": {
             "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/save",
             "verb": "POST",
             "useJwt": true
         },
-        "publish":
-        {
+        "publish": {
             "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/publish",
             "verb": "POST",
             "useJwt": true
         },
-        "stop":
-        {
+        "stop": {
             "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/stop",
             "verb": "POST",
             "useJwt": true
         },
-        "validate":
-        {
+        "validate": {
             "url": "https://sfmc-custom-activity-template-production.up.railway.app/journeybuilder/validate",
             "verb": "POST",
             "useJwt": true
         }
     },
-    "userInterfaces":
-    {
+    "userInterfaces": {
         "configModal": {
             "height": 700,
             "width": 1000,
             "fullscreen": false
         }
     },
-    "schema": 
-    {
-        "arguments":{
+    "schema": {
+        "arguments": {
             "execute": {
-                "inArguments": [],
-                "outArguments": []
+                "inArguments": [
+                    {
+                        "user_ext_id": {
+                            "dataType": "Text",
+                            "isNullable": false,
+                            "direction": "in",
+                            "access": "visible"
+                        }
+                    }
+                ],
+                "outArguments": [
+                ]
             }
         }
     }
