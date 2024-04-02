@@ -17,10 +17,10 @@
         "execute": {
             "inArguments": [
                 {
-                    "user_ext_id": "{{Contact.Attribute.HX_Customer_Last_Search.user_ext_id}}",
-                    "last_search_stay_datetime": "{{Contact.Attribute.HX_Customer_Last_Search.last_search_stay_datetime}}",
-                    "last_search_depart_datetime": "{{Contact.Attribute.HX_Customer_Last_Search.last_search_depart_datetime}}",
-                    "last_search_location_name": "{{Contact.Attribute.HX_Customer_Last_Search.last_search_location_name}}"
+                    "user_ext_id": "{{Event.HX_Customer_Last_Search.user_ext_id}}",
+                    "last_search_stay_datetime": "{{Event.HX_Customer_Last_Search.last_search_stay_datetime}}",
+                    "last_search_depart_datetime": "{{Event.HX_Customer_Last_Search.last_search_depart_datetime}}",
+                    "last_search_location_name": "{{Event.HX_Customer_Last_Search.last_search_location_name}}"
                 }
             ],
             "outArguments": [],

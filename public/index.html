@@ -12,10 +12,18 @@
     </div>
 
     <script src="https://requirejs.org/docs/release/2.3.6/minified/require.js"></script>
-    <script type="text/javascript">
-        require(['customActivity'], function(customActivity) {
-            customActivity.initialize();
-        });
-    </script>
+<script type="text/javascript">
+    require.config({
+        paths: {
+            "customActivity": "public/js/customActivity"
+        }
+    });
+    
+    require(['customActivity'], function(customActivity) {
+        customActivity.initialize();
+    });
+</script>
+
+
 </body>
 </html>
